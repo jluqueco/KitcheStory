@@ -29,6 +29,22 @@ public class Type {
 		super();
 		this.description = description;
 	}
+	
+	public long getTypeID() {
+		return typeID;
+	}
+
+	public void setTypeID(long typeID) {
+		this.typeID = typeID;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	@Override
 	public String toString() {
