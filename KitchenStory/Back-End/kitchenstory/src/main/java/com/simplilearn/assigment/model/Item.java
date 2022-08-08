@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -18,10 +19,10 @@ public class Item {
 	
 	private String description;
 	@OneToOne(
-			fetch = FetchType.LAZY,
+			fetch = FetchType.EAGER,
 			optional = false
 	)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(unique = false)
 	protected Type type;
 	private float price;
 	
