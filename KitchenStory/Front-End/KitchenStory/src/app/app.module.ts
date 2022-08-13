@@ -8,6 +8,9 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
 import { ListItemsComponent } from './list-items/list-items.component';
+import { SearchItemsPipe } from './search-items.pipe';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { ListItemsComponent } from './list-items/list-items.component';
     WelcomeComponent,
     LoginComponent,
     ErrorComponent,
-    ListItemsComponent
+    ListItemsComponent,
+    SearchItemsPipe,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,9 @@ export class Item{
   styleUrls: ['./list-items.component.css']
 })
 export class ListItemsComponent implements OnInit {
+  public searchItem: any ='';
+  query = '';
+  
   items = [
     new Item(1, 'Test item', 10.25, 'Fruit'),
     new Item(2, 'Test item 2',100.25,'Vegetable'),

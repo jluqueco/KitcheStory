@@ -1,0 +1,13 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-success">
+        <div><a routerLink="https://simplilearn.com" class="navbar-brand">KitchenStory</a></div>
+        <ul class="navbar-nav">
+            <li><a *ngIf="isUserLoggedInM()" class="nav-link">Home</a></li>
+            <li><a *ngIf="isUserLoggedInM()" routerLink="/items" class="nav-link">Items</a></li>
+        </ul>
+        <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li><a *ngIf="!isUserLoggedInM()" routerLink="/login" class="nav-link">Login</a></li>
+            <li><a *ngIf="isUserLoggedInM()" routerLink="/logout" class="nav-link">Logout</a></li>
+        </ul>
+    </nav>
+</header>
