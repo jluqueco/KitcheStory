@@ -3,13 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './error/error.component';
 import { ListItemsComponent } from './list-items/list-items.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { RouteGuardService } from './service/route-guard.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
   {path:'login', component:LoginComponent},
-  {path:'welcome/:name', component:WelcomeComponent},
-  {path:'items', component:ListItemsComponent},
+  {path:'welcome/:name', component:WelcomeComponent, canActivate: [RouteGuardService]},
+  {path:'items', component:ListItemsComponent, canActivate: [RouteGuardService]},
+  {path:'logout', component:LogoutComponent},
   {path:'**', component:ErrorComponent}
 ];
 
