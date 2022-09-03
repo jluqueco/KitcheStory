@@ -1,5 +1,6 @@
 package com.simplilearn.assigment.resources;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.simplilearn.assigment.model.Item;
+import com.simplilearn.assigment.model.ShoppingCart;
+import com.simplilearn.assigment.model.ShoppingCartItem;
 import com.simplilearn.assigment.model.Type;
 import com.simplilearn.assigment.model.User;
 import com.simplilearn.assigment.service.ItemService;
+import com.simplilearn.assigment.service.ShoppingCartItemService;
+import com.simplilearn.assigment.service.ShoppingCartService;
 import com.simplilearn.assigment.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -34,11 +39,18 @@ public class KitcheStoryResources {
 	@Autowired
 	private ItemService itemService;
 	
+	@Autowired
+	private ShoppingCartService scService;
+	
+	@Autowired
+	private ShoppingCartItemService sCIS;
+	
 	@GetMapping(path="/items")
 	public List<Item> getAllItems(){
 		System.out.println("Printing all Items...");
 		List<Item> items = itemService.findAll();
-		System.out.println(items);
+		
+		testShoppingCart();
 		return items;
 	}
 	
@@ -48,6 +60,14 @@ public class KitcheStoryResources {
 		System.out.println("Method: getAllUsers()");
 		System.out.println(users);
 		return users;
+	}
+	
+	@GetMapping(path = "/users/{id}")
+	public boolean getUserAdmin(@PathVariable long id){
+		User user = userService.findById(id);
+		System.out.println("Method: getUserAdmin()");
+		System.out.println(user);
+		return user.isAdmin();
 	}
 	
 	@PostMapping(path = "/users/{username}")
@@ -90,6 +110,32 @@ public class KitcheStoryResources {
 		loadedUser.setPassword(password);
 		
 		userService.save(loadedUser);
+	}
+	
+	@GetMapping(path = "/shoppingcart/{id}")
+	public ShoppingCart findShoppingCart(@PathVariable long id) {
+		ShoppingCart sc = scService.findById(id);
+		return sc;
+	}
+	
+	public void testShoppingCart() {
+		User user = userService.findById(1L);
+		List<Item> items = itemService.findAll();
+		List<ShoppingCartItem> sci = new ArrayList<>();
+		ShoppingCart sc = new ShoppingCart(user,null);
+		scService.save(sc);
+		
+		int i = 1;
+		for(Item item : items) {
+			
+			sci.add(sCIS.save(new ShoppingCartItem(sc,item,i)));
+			i++;
+		}
+		
+		sc.setUser(user);
+		sc.setItems(sci);
+		
+		scService.save(sc);
 	}
 
 }

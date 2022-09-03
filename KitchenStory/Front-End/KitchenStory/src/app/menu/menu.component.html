@@ -6,6 +6,7 @@
             <li><a *ngIf="isUserLoggedInM()" routerLink="/items" class="nav-link">Items</a></li>
         </ul>
         <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li><a *ngIf="isUserAdmin()" routerLink="/userAdmin" class="nav-link">Admin Console</a></li>
             <li><a *ngIf="!isUserLoggedInM()" routerLink="/login" class="nav-link">Login</a></li>
             <li><a *ngIf="isUserLoggedInM()" routerLink="/logout" class="nav-link">Logout</a></li>
         </ul>

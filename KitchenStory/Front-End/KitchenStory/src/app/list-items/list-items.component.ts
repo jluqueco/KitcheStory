@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ItemDataService } from '../service/data/item-data.service';
 
 export class Item{
@@ -27,13 +28,8 @@ export class ListItemsComponent implements OnInit {
   query = '';
   
   items: Item[] = [];
-  //[
-  //   new Item(1, 'Test item', 10.25, 'Fruit'),
-  //   new Item(2, 'Test item 2',100.25,'Vegetable'),
-  //   new Item(3,'Test item 3',1000.25,'Nut')
-  // ]
 
-  constructor(private itemDataService: ItemDataService) { }
+  constructor(private itemDataService: ItemDataService, private router: Router) { }
 
   ngOnInit(): void {
     this.itemDataService.retrieveAllItems().subscribe(
@@ -42,6 +38,10 @@ export class ListItemsComponent implements OnInit {
         this.items = response;
       }
     );
+  }
+
+  handlePurchase(){
+    this.router.navigate(['checkout', 'jluqueco']);
   }
 
 }
